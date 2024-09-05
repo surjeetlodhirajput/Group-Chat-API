@@ -276,7 +276,7 @@ To run the tests and generate a coverage report:
    ```
 4. After running the tests, you should see a coverage report similar to the image below:
 
-   ![Test Coverage](https://github.com/surjeetlodhirajput/Group-Chat-API/tests/testcoverage.png)
+   ![Test Coverage](https://github.com/surjeetlodhirajput/Group-Chat-API/blob/main/tests/testcoverage.png)
 
 ## License
 
