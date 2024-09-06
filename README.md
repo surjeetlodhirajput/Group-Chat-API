@@ -39,6 +39,7 @@ A simple Node.js application providing web services for group chat and data mana
    ```
 
 3. Set up environment variables. Create a `.env` file in the root directory with the following content:
+  **Important Note**: You must never include you `.env` file in public github repo if it has having any private api keys
 
    ```env
    PORT=3000
@@ -257,24 +258,18 @@ The application provides the following API endpoints:
 ## Testing
 
 To run the tests and generate a coverage report:
-
-1. **Important Note**: You must set a `TEST_JWT` environment variable with a valid JWT in your `.env` file for the tests to run successfully. Add the following line to your `.env`:
-
-   ```env
-   TEST_JWT=your_test_jwt_token
-   ```
-2. Run tests:
+1. Run tests:
 
    ```bash
    npm test
    ```
 
-3. Run tests with coverage report:
+2. Run tests with coverage report:
 
    ```bash
    npm run test:coverage
    ```
-4. After running the tests, you should see a coverage report similar to the image below:
+3. After running the tests, you should see a coverage report similar to the image below:
 
    ![Test Coverage](https://github.com/surjeetlodhirajput/Group-Chat-API/blob/main/tests/testcoverage.png)
 

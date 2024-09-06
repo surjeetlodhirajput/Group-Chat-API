@@ -3,22 +3,26 @@ const app = require('../app');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const sinon = require('sinon');
-const Token = require("../models/Token");
+const jwt = require('jsonwebtoken');
+const Token = require('../models/Token');
 require('dotenv').config()
 describe('Auth Controller', () => {
   let findOneStub;
   let tokenSave;
   let TokenDeleteStub;
+  const testToken = jwt.sign({ id: '1', role: 'amdin' }, process.env.JWT_SECRET, { expiresIn: '1h' });
   beforeEach(() => {
     TokenDeleteStub = sinon.stub(Token,'findOneAndDelete');
     findOneStub = sinon.stub(User, 'findOne');
     tokenSave = sinon.stub(Token.prototype,'save');
+    tokenOneStud = sinon.stub(Token,'findOne');
   });
 
   afterEach(() => {
-    sinon.restore();
+    findOneStub?.restore();
     tokenSave.restore();
     TokenDeleteStub.restore();
+    tokenOneStud.restore();
   });
 
   it('should login successfully with correct credentials', async () => {
@@ -61,10 +65,11 @@ describe('Auth Controller', () => {
   });
   it('should logout The User froom the Db', async () => {
     TokenDeleteStub.returns(Promise.resolve(true));
+    tokenOneStud.returns(Promise.resolve(testToken));
     //please enter you valid jwt token here to to make this test success jwt is required for proper authentication
     const res = await request(app)
       .post('/api/auth/logout/')
-      .set('Authorization', `Bearer ${process.env.TEST_JWT}`);
+      .set('Authorization', `Bearer ${testToken}`);
     expect(res.statusCode).toEqual(200);
   });
 });
